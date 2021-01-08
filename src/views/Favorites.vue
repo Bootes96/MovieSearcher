@@ -1,5 +1,19 @@
 <template>
   <div>
-    <h1>This is favorites page</h1>
+    <Navbar />
+    <MovieCard />
   </div>
 </template>
+
+<script>
+import Navbar from '../components/Navbar'
+import MovieCard from '../components/MovieCard'
+
+export default {
+  name: 'Favorites',
+  components: {
+    Navbar,
+    MovieCard
+  }
+}
+</script>

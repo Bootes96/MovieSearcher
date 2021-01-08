@@ -43,9 +43,9 @@
 						<img src="../assets/kuryer.jpg">
 					</div>
 					<div class="card-content">
-						<h4 class="card-title">
+						<a href="#" class="card-title black-text">
 							Курьер
-						</h4>
+						</a>
 						<p>I am a very simple card. I am good at containing small bits of information.
 						I am convenient because I require little markup to use effectively.</p>
 					</div>
