@@ -1,59 +1,19 @@
 <template>
 	<div class="container">
-		<div class="row">
-			<div class="col s4">
+		<div class="cards">
+			<div class="card-wrapper" v-for="movie in movies" :key="movie.id">
 				<div class="card">
-					<div class="card-image">
-						<img src="../assets/kuryer.jpg">
-					</div>
-					<div class="card-content">
-						<h4 class="card-title">
-							Курьер
-						</h4>
-						<p>I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.</p>
-					</div>
 					<div class="card-action">
 						<a class="green-text text-darken-2" href="#">Add to Favorite</a>
 						<i class="material-icons card-icon">favorite_border</i>
 					</div>
-				</div>
-			</div>
-			<div class="col s4">
-				<div class="card">
 					<div class="card-image">
-						<img src="../assets/kuryer.jpg">
-					</div>
-					<div class="card-content">
-						<h4 class="card-title">
-							Курьер
-						</h4>
-						<p>I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.</p>
-					</div>
-					<div class="card-action">
-						<a class="green-text text-darken-2" href="#">Add to Favorite</a>
-						<i class="material-icons card-icon">favorite_border</i>
+						<img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
 					</div>
 				</div>
-			</div>
-			<div class="col s4">
-				<div class="card">
-					<div class="card-image">
-						<img src="../assets/kuryer.jpg">
-					</div>
-					<div class="card-content">
-						<a href="#" class="card-title black-text">
-							Курьер
-						</a>
-						<p>I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.</p>
-					</div>
-					<div class="card-action">
-						<a class="green-text text-darken-2" href="#">Add to Favorite</a>
-						<i class="material-icons card-icon">favorite_border</i>
-					</div>
-				</div>
+				<a href="#" class="card-title black-text">
+					{{movie.title}} <span>({{movieRelease(movie.release_date)}})</span>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -61,17 +21,29 @@
 
 <script>
 export default {
-	name: 'MovieCard'
+	name: 'MovieCard',
+	props:['movies'],
+	methods: {
+		movieRelease(date) {
+			return date.split('-')[0]
+		}
+	}
 }
 </script>
 
 <style lang="scss" scoped>
+	.cards	{
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		grid-column-gap: 1.5rem;
+		grid-row-gap: 2rem;
+	}
 	.card {
 		&-title {
-			margin: 0 0 15px 0;
 			font-weight: bold;
 			font-size: 1.5rem;
 			position: relative;
+			text-align: center;
 		}
 		&-action {
 			display: flex;

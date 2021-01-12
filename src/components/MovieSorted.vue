@@ -129,6 +129,7 @@
               type="radio"
               checked
               value="popularity.desc"
+							v-model="sortBy"
             />
             <span>Popularity</span>
           </label>
@@ -140,6 +141,7 @@
               type="radio"
               checked
               value="release_date.desc"
+							v-model="sortBy"
             />
             <span>Release Date</span>
           </label>
@@ -151,6 +153,7 @@
               type="radio"
               checked
               value="original_title.desc"
+							v-model="sortBy"
             />
             <span>Original Title</span>
           </label>
@@ -162,6 +165,7 @@
               type="radio"
               checked
               value="vote_count.desc"
+							v-model="sortBy"
             />
             <span>Vote Count</span>
           </label>
@@ -173,10 +177,17 @@
 
 <script>
 export default {
-    name: 'MovieSorted',
-    data: () => ({
-        checkedGenres: []
-    })
+  name: 'MovieSorted',
+  data: () => ({
+		checkedGenres: [],
+		sortBy: ''
+	}),
+	watch: {
+		async sortBy(newSort) {
+			this.$router.push("/moviesearcher/sort_by" + "?" + newSort);
+			this.$store.commit('sortBy', newSort)
+		}
+	}
 }
 </script>
 

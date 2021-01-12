@@ -9,7 +9,7 @@
     <nav class="green darken-2" >
       <div class="nav-wrapper">
       <div class="row">
-        <router-link to="/" href="#!" class="brand-logo col s3">Rick and Morty</router-link>
+        <router-link to="/" href="#!" class="brand-logo col s3">MovieSearcher</router-link>
         <ul class="nav-list col s9">
           <li class="nav-el">
             <a class='dropdown-trigger nav-link' href='#' data-target='dropdown1' ref="dropdown">Options</a>
