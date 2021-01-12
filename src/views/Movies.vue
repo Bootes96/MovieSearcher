@@ -18,13 +18,18 @@ export default {
     MovieCard
   },
   async mounted() {
+    const sort = this.$route.fullPath.split('?')[1] || 'popularity.desc' //Чтобы не терять данные при передаче по ссылке 
+    this.$store.commit('sortBy', sort) 
     await this.$store.dispatch('fetchMovies')
   },
   computed: {
     ...mapGetters(['movies']),
-    ...mapState(['sort']),
+    ...mapState(['sort', 'genres']),
     sortedMovies() {
       return this.sort
+    },
+    changedGenres() {
+      return this.genres
     }
   },
   watch: {
@@ -32,7 +37,14 @@ export default {
       try {
         await this.$store.dispatch('fetchMovies')
       } catch (error) {
-        
+        throw new Error(error)        
+      }
+    },
+    async changedGenres() {
+      try {
+        await this.$store.dispatch('fetchMovies')
+      } catch (error) {
+        throw new Error(error)
       }
     }
   }

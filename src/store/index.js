@@ -9,18 +9,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     movies: [],
-    sort: 'popularity.desc'
+    sort: '',
+    genres: ''
   },
   mutations: {
     setMovies: (state, data) => (state.movies = data),
-    sortBy: (state, sort) => (state.sort = sort)
+    sortBy: (state, sort) => (state.sort = sort),
+    changeGenres: (state, genres) => (state.genres = genres) 
   },
   actions: {
     async fetchMovies({commit, state}) {
       try {
-        const result = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&language=en-US&sort_by=${state.sort}&include_adult=false&include_video=false&page=1`)
-        console.log(result);
-        console.log(result.data);
+        const result = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&language=en-US&sort_by=${state.sort}&include_adult=false&include_video=false&page=1${state.genres}`)
         commit('setMovies', result.data)
       } catch (error) {
         throw new Error(error)

@@ -183,10 +183,14 @@ export default {
 		sortBy: ''
 	}),
 	watch: {
-		async sortBy(newSort) {
-			this.$router.push("/moviesearcher/sort_by" + "?" + newSort);
+		sortBy(newSort) {
+			this.$router.push("/moviesearcher/sort_by" + "?" + newSort)
 			this.$store.commit('sortBy', newSort)
-		}
+    },
+    checkedGenres(genresArr) {
+      const genres = genresArr.join(',')
+      this.$store.commit('changeGenres', "&with_genres=" + genres)
+    }
 	}
 }
 </script>
