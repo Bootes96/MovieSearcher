@@ -25,7 +25,11 @@ export default {
 	props:['movies'],
 	methods: {
 		movieRelease(date) {
-			return date.split('-')[0]
+			if(date) {
+				return date.split('-')[0]
+			} else {
+				return 'unknown'
+			}
 		}
 	}
 }

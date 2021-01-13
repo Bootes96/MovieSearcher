@@ -18,8 +18,12 @@ export default {
     MovieCard
   },
   async mounted() {
-    const sort = this.$route.fullPath.split('?')[1] || 'popularity.desc' //Чтобы не терять данные при передаче по ссылке 
-    this.$store.commit('sortBy', sort) 
+    const { with_genres } = this.$route.query
+    const { sort_by } = this.$route.query
+    const sort = sort_by || 'popularity.desc' 
+    const genres = with_genres || ''
+    this.$store.commit('sortBy', sort)
+    this.$store.commit('changeGenres', genres) 
     await this.$store.dispatch('fetchMovies')
   },
   computed: {
@@ -33,6 +37,9 @@ export default {
     }
   },
   watch: {
+    //'$route' (to, from) {
+      //console.log(to);
+    //},
     async sortedMovies() {
       try {
         await this.$store.dispatch('fetchMovies')

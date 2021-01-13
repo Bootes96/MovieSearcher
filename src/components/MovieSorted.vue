@@ -184,11 +184,14 @@ export default {
 	}),
 	watch: {
 		sortBy(newSort) {
-			this.$router.push("/moviesearcher/sort_by" + "?" + newSort)
+      //this.$router.push("/sort_by" + "?" + newSort)
+      this.$router.push({path: window.location.search, query: {sort_by: newSort}})
 			this.$store.commit('sortBy', newSort)
     },
     checkedGenres(genresArr) {
       const genres = genresArr.join(',')
+      //this.$router.push("/with_genres" + "=" + genres)
+      this.$router.push({path: window.location.search, query: {with_genres: genres}})
       this.$store.commit('changeGenres', "&with_genres=" + genres)
     }
 	}

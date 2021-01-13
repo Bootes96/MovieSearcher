@@ -26,14 +26,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Single.vue')
   },
-  {
-    path: "/moviesearcher/:sort_by/",
-    name: "Sort",
-    component: Movies,
-  }
 ]
 
 const router = new VueRouter({
+  base: '/moviesearcher',
   mode: 'history',
   routes
 })
