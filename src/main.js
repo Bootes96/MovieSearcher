@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'materialize-css/dist/js/materialize.min'
+import Paginate from 'vuejs-paginate'
+
+Vue.component('Paginate', Paginate)
 
 Vue.config.productionTip = false
 

@@ -9,7 +9,7 @@
     <nav class="green darken-2" >
       <div class="nav-wrapper">
       <div class="row">
-        <router-link to="/" href="#!" class="brand-logo col s3">MovieSearcher</router-link>
+        <a @click.prevent="startPage" class="brand-logo col s3">MovieSearcher</a>
         <ul class="nav-list col s9">
           <li class="nav-el">
             <a class='dropdown-trigger nav-link' href='#' data-target='dropdown1' ref="dropdown">Options</a>
@@ -56,6 +56,16 @@
       this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
         closeOnClick: false
       })
+    },
+
+    methods: {
+      startPage() {
+        this.$store.commit('sortBy', 'popularity.desc')
+        this.$store.commit('changeGenres', '')
+        this.$store.commit('changePage', 1)
+        this.$store.dispatch('fetchMovies')
+        this.$router.push('/')
+      }
     },
 
     beforeDestroy() {

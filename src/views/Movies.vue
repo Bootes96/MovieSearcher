@@ -2,6 +2,7 @@
   <div>
     <Navbar />
     <MovieCard :movies='movies.results'/>
+    <Pagination v-if="movies.total_pages" :totalPages="movies.total_pages"/>
   </div>
 </template>
 
@@ -10,20 +11,25 @@
 import Navbar from '@/components/Navbar.vue'
 import MovieCard from '@/components/MovieCard.vue'
 import {mapGetters, mapState} from 'vuex'
+import Pagination from '../components/Pagination.vue'
 
 export default {
   name: 'Movies',
   components: {
     Navbar,
-    MovieCard
+    MovieCard,
+    Pagination
   },
   async mounted() {
-    const { with_genres } = this.$route.query
     const { sort_by } = this.$route.query
+    const { with_genres } = this.$route.query
+    const { page } = this.$route.query
     const sort = sort_by || 'popularity.desc' 
     const genres = with_genres || ''
+    const currentPage = page || 1
     this.$store.commit('sortBy', sort)
-    this.$store.commit('changeGenres', genres) 
+    this.$store.commit('changeGenres', genres)
+    this.$store.commit('changePage', currentPage) 
     await this.$store.dispatch('fetchMovies')
   },
   computed: {
@@ -37,9 +43,6 @@ export default {
     }
   },
   watch: {
-    //'$route' (to, from) {
-      //console.log(to);
-    //},
     async sortedMovies() {
       try {
         await this.$store.dispatch('fetchMovies')

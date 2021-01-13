@@ -10,17 +10,19 @@ export default new Vuex.Store({
   state: {
     movies: [],
     sort: '',
-    genres: ''
+    genres: '',
+    page: '',
   },
   mutations: {
     setMovies: (state, data) => (state.movies = data),
     sortBy: (state, sort) => (state.sort = sort),
-    changeGenres: (state, genres) => (state.genres = genres) 
+    changeGenres: (state, genres) => (state.genres = genres),
+    changePage: (state, pageNum) => (state.page = pageNum)
   },
   actions: {
     async fetchMovies({commit, state}) {
       try {
-        const result = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&language=en-US&sort_by=${state.sort}&include_adult=false&include_video=false&page=1&with_genres=${state.genres}`)
+        const result = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&language=en-US&sort_by=${state.sort}&include_adult=false&include_video=false&page=${state.page}&with_genres=${state.genres}`)
         commit('setMovies', result.data)
       } catch (error) {
         throw new Error(error)
@@ -30,6 +32,9 @@ export default new Vuex.Store({
   getters: {
     movies(state) {
       return state.movies
+    },
+    totalPages(state) {
+      return state.movies.total_pages
     }
   },
   modules: {
