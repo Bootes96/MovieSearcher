@@ -23,13 +23,7 @@
             ><a class="nav-link">{{link.title}}</a>
           </router-link>
           <li class="nav-el">
-            <form class="search-form">
-              <div class="input-field">
-                <input id="search" type="search" required>
-                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
-              </div>
-            </form>
+            <Search />
           </li>
         </ul>
       </div>
@@ -40,6 +34,7 @@
 
 <script>
   import MovieSorted from '@/components/MovieSorted'
+  import Search from '@/components/Search'
   export default {
     name: 'Navbar',
 
@@ -76,7 +71,8 @@
     },
 
     components: {
-      MovieSorted
+      MovieSorted,
+      Search
     }
   }
 </script>  
@@ -85,10 +81,10 @@
   .brand-logo {
     display: block;
   }
+  .row .col {
+    float: right;
+  }
   .nav {
-    &-list {
-      float: right;
-    }
     &-el{
       margin-right: 40px;
       &:last-child {
@@ -101,14 +97,6 @@
       padding: 0 40px;
     }
   }
-  .input-field {
-    height: 64px;
-  }
-
-  #search {
-    height: 100%;
-  }
-
   .dropdown-content {
     top: -65px;
     width: 500px !important;

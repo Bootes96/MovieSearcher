@@ -8,23 +8,26 @@ const routes = [
   {
     path: '/',
     name: 'Movies',
+    meta: { layout: "main" },
     component: Movies
   },
   {
     path: '/favorites',
     name: 'Favorites',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Favorites.vue')
+    meta: { layout: "default" },
+    component: () => import('../views/Favorites.vue')
   },
   {
     path: '/single',
     name: 'Single',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Single.vue')
+    meta: { layout: "default" },
+    component: () => import('../views/Single.vue')
+  },
+  {
+    path: "/search/:query",
+    name: "MovieSearch",
+    meta: { layout: "main" },
+    component: () => import("../views/MovieSearch.vue"),
   },
 ]
 

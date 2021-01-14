@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <MovieCard :movies='movies.results'/>
     <Pagination v-if="movies.total_pages" :totalPages="movies.total_pages"/>
   </div>
@@ -8,7 +7,6 @@
 
 <script>
 // @ is an alias to /src
-import Navbar from '@/components/Navbar.vue'
 import MovieCard from '@/components/MovieCard.vue'
 import {mapGetters, mapState} from 'vuex'
 import Pagination from '../components/Pagination.vue'
@@ -16,7 +14,6 @@ import Pagination from '../components/Pagination.vue'
 export default {
   name: 'Movies',
   components: {
-    Navbar,
     MovieCard,
     Pagination
   },

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import search from './search'
 import axios from 'axios'
+
 
 const KEY = process.env.VUE_APP_API_KEY
 
@@ -38,5 +40,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
+    search
   }
 })
