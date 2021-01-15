@@ -7,11 +7,11 @@
 						<a class="green-text text-darken-2" href="#">Add to Favorite</a>
 						<i class="material-icons card-icon">favorite_border</i>
 					</div>
-					<div class="card-image">
+					<div class="card-image" @click="$router.push(`/single/${movie.id}`)">
 						<img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
 					</div>
 				</div>
-				<a href="#" class="card-title black-text">
+				<a @click="$router.push(`/single/${movie.id}`)" class="card-title black-text">
 					{{movie.title}} <span>({{movieRelease(movie.release_date)}})</span>
 				</a>
 			</div>

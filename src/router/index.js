@@ -12,6 +12,12 @@ const routes = [
     component: Movies
   },
   {
+    path: "/single/:id",
+    name: "Single",
+    meta: { layout: "default" },
+    component: () => import("../views/Single.vue"),
+  },
+  {
     path: '/favorites',
     name: 'Favorites',
     meta: { layout: "default" },
@@ -29,6 +35,10 @@ const routes = [
     meta: { layout: "main" },
     component: () => import("../views/MovieSearch.vue"),
   },
+  {
+    path: "/search",
+    redirect: "/",
+  }, 
 ]
 
 const router = new VueRouter({

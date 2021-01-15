@@ -5,9 +5,11 @@
 				type="search"
 				v-model="query"
 				@input="debouncedSearch"
+				autocomplete="off"
+				ref="searchInput"
 			>
 			<label class="label-icon" for="search"><i class="material-icons">search</i></label>
-			<i class="material-icons">close</i>
+			<i @click="clearField" class="material-icons">close</i>
 		</div>
   </form>
 </template>
@@ -20,12 +22,12 @@ export default {
 	computed: {
 		...mapState(['searchQuery', 'searchMovies']),
 		query: {
-		get() {
-			return this.$store.state.search.searchQuery
-		},
-		set(val) {
-			return this.setSearchQuery(val)
-		}
+			get() {
+				return this.$store.state.search.searchQuery
+			},
+			set(val) {
+				return this.setSearchQuery(val)
+			}
 		}
 	},
 	methods: {
@@ -33,7 +35,11 @@ export default {
 		debouncedSearch: debounce(function() {
 			this.$router.push('/search/' + this.query)
 			this.search()
-		}, 500)
+		}, 500),
+		clearField() {
+			this.$refs.searchInput.value = ''
+			this.$router.push('/')
+		}
 	}
 }
 </script>

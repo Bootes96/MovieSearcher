@@ -12,7 +12,7 @@
 				</div>
 			</nav>
 		</div>
-		<Favorites />
+		<router-view />
 	</div>
 </template>
 

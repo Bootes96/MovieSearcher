@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import search from './search'
+import movieDetails from './movieDetails'
 import axios from 'axios'
 
 
@@ -37,9 +38,10 @@ export default new Vuex.Store({
     },
     totalPages(state) {
       return state.movies.total_pages
-    }
+    },
   },
   modules: {
-    search
+    search, 
+    movieDetails
   }
 })

@@ -1,83 +1,57 @@
 <template>
   <div>
-	<Navbar />
 	<div class="container">
 			<div>
 				<div>
-					<h1 class="movie__title">Курьер</h1>
+					<h1 class="movie__title">{{movieDetails.title}}</h1>
 					<div class="movie__content row">
 						<div class="movie__left">
 							<div class="movie__img-wrapper">
-								<img class="movie__img" src="../assets/kuryer.jpg" alt="movie">
+								<img class="movie__img" :src="`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`" alt="movie">
 							</div>
-							<span class="movie__average-vote green darken-2">7.3</span>
+							<span class="movie__average-vote green darken-2">{{movieDetails.vote_average}}</span>
 							<button class="btn movie__average-button green darken-2">Add to Faves</button>
 						</div>
 						<div class="movie__info">
 							<h4 class="section-title">Movie Title</h4>
-							<p>Курьер (кг)</p>
+							<p>{{movieDetails.original_title}} ({{movieDetails.original_language}})</p>
 							<h4 class="section-title">Tagline</h4>
-							<p>No available</p>
+							<p>{{movieDetails.tagline}}</p>
 							<h4 class="section-title">Description</h4>
-							<p>Ivan Mirosnikov, a cheeky young man in the Gorbachev era, is trying to figure out what to do with his life (he's not in college, and the 2-year mandatory military service is looming large ahead of him). 
-								Meanwhile, he lives with his divorced mother, and works as a courier at a Russian newspaper. 
-								Through his job, he meets patronizing Professor Kuznetzov and his rebellious daughter Katya. 
-								To annoy the professor, Ivan claims to have an affair with Katya. 
-								To his surprise, Katya backs his story up.
-							</p>
+							<p>{{movieDetails.overview}}</p>
 							<h4 class="section-title">Release Date</h4>
-							<p>1986-06-06</p>
+							<p>{{movieDetails.release_date}}</p>
 							<h4 class="section-title">Genres</h4>
 							<p>Drama Romance Comedy</p>
 							<h4 class="section-title">Budget</h4>
-							<p>$0</p>
+							<p>${{movieDetails.budget}}</p>
 							<h4 class="section-title">Credits</h4>
 							<h4 class="section-title">Crew</h4>
 							<div class="credits">
 								<div class="credits__person">
-									<span class="credits__person-name">Karen Shakhnazarov</span>
+									<span class="credits__person-name">{{movieDirector}}</span>
 									<span class="credits__person-character">Director</span>
 								</div>	
 							</div>
 							<h4 class="section-title">Crew</h4>
-							<div class="credits">
+							<div class="credits" v-for="actor in mainActors" :key="actor.id">
 								<div class="credits__person">
-									<span class="credits__person-name">Fyodor Dunayevsky</span>
-									<span class="credits__person-character">Ivan</span>
-								</div>
-								<div class="credits__person">
-									<span class="credits__person-name">Anastasiya Nemolyaeva</span>
-									<span class="credits__person-character">Katya</span>
-								</div>
-								<div class="credits__person">
-									<span class="credits__person-name">Oleg Basilashvili</span>
-									<span class="credits__person-character">Katya's father</span>
-								</div>
-								<div class="credits__person">
-									<span class="credits__person-name">Inna Churikova</span>
-									<span class="credits__person-character">Ivan's mother</span>
-								</div>
-								<div class="credits__person">
-									<span class="credits__person-name">Aleksandr Pankratov-Chyornyy</span>
-									<span class="credits__person-character">Ivan's chief</span>
-								</div>
-								<div class="credits__person">
-									<span class="credits__person-name">Vladimir Menshov</span>
-									<span class="credits__person-character">Guest on Katya's birthday</span>
+									<span class="credits__person-name">{{actor.name}}</span>
+									<span class="credits__person-character">{{actor.character}}</span>
 								</div>
 							</div>
 							<div class="votes">
 								<div class="votes__item">
 									<h4 class="votes__title">Average Vote:</h4>
-									<span>7.3</span>
+									<span>{{movieDetails.vote_average}}</span>
 								</div>
 								<div class="votes__item">
 									<h4 class="votes__title">Number of votes:</h4>
-									<span>7.3</span>
+									<span>{{movieDetails.vote_count}}</span>
 								</div>
 								<div class="votes__item">
 									<h4 class="votes__title">Popularity:</h4>
-									<span>7.3</span>
+									<span>{{movieDetails.popularity}}</span>
 								</div>
 							</div>
 						</div>
@@ -92,11 +66,20 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import SimilarMovies from '../components/SimilarMovies'
+import {mapGetters} from 'vuex'
 export default {
 	name: 'Single',
 	components: {
 		SimilarMovies,
 		Navbar
+	},
+	async mounted() {
+		const id = this.$route.params.id
+		this.$store.dispatch('fetchMovieById', id)
+		this.$store.dispatch('fetchMovieCast', id)
+	},
+	computed: {
+		...mapGetters(['movieDetails', 'movieDirector', 'mainActors'])
 	}
 }
 </script>

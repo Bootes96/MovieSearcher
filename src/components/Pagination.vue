@@ -30,8 +30,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .pagination {
-    text-align: center;
-    margin: 2rem 0 2rem 0;
-  }
 </style>

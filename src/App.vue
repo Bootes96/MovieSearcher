@@ -36,4 +36,9 @@ export default {
   .container {
     margin-top: 2rem;
   }
+
+  .pagination {
+    text-align: center;
+    margin: 2rem 0 2rem 0;
+  }
 </style>
