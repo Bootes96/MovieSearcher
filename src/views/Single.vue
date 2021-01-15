@@ -58,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<SimilarMovies />
+			<SimilarMovies v-if="similar.length" :similar="similar"/>
 	</div>
   </div>
 </template>
@@ -77,9 +77,20 @@ export default {
 		const id = this.$route.params.id
 		this.$store.dispatch('fetchMovieById', id)
 		this.$store.dispatch('fetchMovieCast', id)
+		this.$store.dispatch('fetchSimilarMovies', id)
 	},
 	computed: {
-		...mapGetters(['movieDetails', 'movieDirector', 'mainActors'])
+		...mapGetters(['movieDetails', 'movieDirector', 'mainActors', 'similar']),
+		newId() {
+			return this.$route.params.id
+		}
+	},
+	watch: {
+		newId(id) {
+			this.$store.dispatch('fetchMovieById', id)
+			this.$store.dispatch('fetchMovieCast', id)
+			this.$store.dispatch('fetchSimilarMovies', id)
+		}
 	}
 }
 </script>
