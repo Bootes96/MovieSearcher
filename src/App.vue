@@ -41,4 +41,27 @@ export default {
     text-align: center;
     margin: 2rem 0 2rem 0;
   }
+
+  .cards	{
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		grid-column-gap: 1.5rem;
+		grid-row-gap: 2rem;
+	}
+	.card {
+		&-title {
+			font-weight: bold;
+			font-size: 1.5rem;
+			position: relative;
+			text-align: center;
+			cursor: pointer;
+		}
+		&-action {
+			display: flex;
+			justify-content: space-between;
+			a {
+				cursor: pointer;
+			}
+		}
+	}
 </style>

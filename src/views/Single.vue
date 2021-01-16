@@ -22,7 +22,7 @@
 							<h4 class="section-title">Release Date</h4>
 							<p>{{movieDetails.release_date}}</p>
 							<h4 class="section-title">Genres</h4>
-							<p>Drama Romance Comedy</p>
+							<p>{{genres}}</p>
 							<h4 class="section-title">Budget</h4>
 							<p>${{movieDetails.budget}}</p>
 							<h4 class="section-title">Credits</h4>
@@ -80,7 +80,7 @@ export default {
 		this.$store.dispatch('fetchSimilarMovies', id)
 	},
 	computed: {
-		...mapGetters(['movieDetails', 'movieDirector', 'mainActors', 'similar']),
+		...mapGetters(['movieDetails', 'movieDirector', 'mainActors', 'similar', 'genres']),
 		newId() {
 			return this.$route.params.id
 		}

@@ -34,15 +34,18 @@ export default {
 		},
 		movieDirector(state) { 
 			const director = _.filter(state.movieCast.credits.crew, function(item) {
-        return item.job === "Director"
-			}); //ищем режиссера фильма
-			return director[0].name
-		},
+			return item.job === "Director"
+				})
+				return director[0].name
+			},
 		mainActors(state) {
 			return state.movieCast.credits.cast.slice(0, 8)
 		},
 		similar(state) {
 			return state.similarMovies.results.slice(0,6)
-		} 
+		},
+		genres(state) {
+			return state.movie.genres.map(item => item.name).join(', ')
+		}
 	}
 }
