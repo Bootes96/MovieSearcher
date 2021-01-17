@@ -8,7 +8,8 @@
 						<i class="material-icons card-icon red-text">favorite</i>
 					</div>
 					<div class="card-image" @click="$router.push(`/single/${movie.id}`)">
-						<img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
+						<img v-if="!movie.poster_path" src="../assets/no-image.jpg" alt="movie poster"/>
+						<img v-else :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="movie poster"/>
 					</div>
 				</div>
 				<a @click="$router.push(`/single/${movie.id}`)" class="card-title black-text">

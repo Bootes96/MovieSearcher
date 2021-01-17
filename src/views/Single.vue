@@ -8,7 +8,8 @@
 						<div class="movie__content row">
 							<div class="movie__left">
 								<div class="movie__img-wrapper">
-									<img class="movie__img" :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="movie">
+									<img class="movie__img" v-if="!movie.poster_path" src="../assets/no-image.jpg" alt="movie poster" />
+									<img class="movie__img" v-else :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="movie poster"/>
 								</div>
 								<span class="movie__average-vote green darken-2">{{movie.vote_average}}</span>
 								<button class="btn movie__average-button green darken-2">Add to Faves</button>
@@ -59,7 +60,7 @@
 						</div>
 					</div>
 				</div>
-				<SimilarMovies />
+				<SimilarMovies :movieId='movieId'/>
 		</div>
   </div>
 </template>
@@ -78,6 +79,7 @@ export default {
 		mainActors: [],
     genres: "",
 		directorName: "",
+		movieId: ''
 	}),
 	components: {
 		SimilarMovies,
@@ -86,28 +88,34 @@ export default {
 	},
 	async mounted() {
 		const id = this.$route.params.id
+		this.movieId = id
 		this.movie = await this.$store.dispatch('fetchMovieById', id)
 		this.movieCast = await this.$store.dispatch('fetchMovieCast', id)
-		const director = _.filter(this.movieCast.crew, function(item) {
-        return item.job === "Director"
-			})
-		this.directorName = director[0].name
-		this.genres = this.movie.genres.map((genre) => genre.name).join(", ")
-		this.mainActors = this.movieCast.cast.slice(0, 8) 
-		this.director = this.$store.getters.movieDirector
-		this.loading = false
+		this.movieDetails()
 	},
-	computed: {
-		newId() {
-			return this.$route.params.id
-		},
+	methods: {
+		movieDetails() {
+			const director = _.filter(this.movieCast.crew, function(item) {
+					return item.job === "Director"
+				})
+			if(director.length) {
+				this.directorName = director[0].name
+			} else {
+				this.directorName = 'unknown'
+			}
+			this.genres = this.movie.genres.map((genre) => genre.name).join(", ")
+			this.mainActors = this.movieCast.cast.slice(0, 8) 
+			this.director = this.$store.getters.movieDirector
+			this.loading = false
+		}
 	},
 	watch: {
-		newId(id) {
-			this.$store.dispatch('fetchMovieById', id)
-			this.$store.dispatch('fetchMovieCast', id)
-			this.$store.dispatch('fetchSimilarMovies', id)
-			this.loading = false
+		async '$route'() {
+			const id = this.$route.params.id
+			this.movieId = id
+			this.movie = await this.$store.dispatch('fetchMovieById', id)
+			this.movieCast = await this.$store.dispatch('fetchMovieCast', id)
+			this.movieDetails()
 		}
 	},
 }

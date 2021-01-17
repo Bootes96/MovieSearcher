@@ -4,8 +4,10 @@ import router from './router'
 import store from './store'
 import 'materialize-css/dist/js/materialize.min'
 import Paginate from 'vuejs-paginate'
+import {func} from './utils/addToFavorite'
 
 Vue.component('Paginate', Paginate)
+Vue.prototype.$func = func
 
 Vue.config.productionTip = false
 

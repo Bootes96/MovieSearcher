@@ -44,7 +44,7 @@ export default {
 
   .cards	{
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		grid-template-columns: 1fr 1fr 1fr;
 		grid-column-gap: 1.5rem;
 		grid-row-gap: 2rem;
 	}
@@ -56,6 +56,13 @@ export default {
 			text-align: center;
 			cursor: pointer;
 		}
+    &-image {
+      img {
+        min-height: 389px;
+        object-fit: cover;
+      }
+	    min-height: 435px;
+    }
 		&-action {
 			display: flex;
 			justify-content: space-between;
