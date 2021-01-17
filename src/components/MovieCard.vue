@@ -8,7 +8,8 @@
 						<i class="material-icons card-icon">favorite</i>
 					</div>
 					<div class="card-image" @click="$router.push(`/single/${movie.id}`)">
-						<img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`">
+						<img v-if="!movie.poster_path" src="../assets/no-image.jpg"/>
+						<img v-else :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" />
 					</div>
 				</div>
 				<a @click="$router.push(`/single/${movie.id}`)" class="card-title black-text">
@@ -59,9 +60,16 @@ export default {
 					localStorage.setItem('movies', JSON.stringify(storageMovies))
 				}				
 		}
-	}
+	},
 }
 </script>
 
 <style lang="scss" scoped>
+.card-image {
+	img {
+		min-height: 389px;
+		object-fit: cover;
+	}
+	min-height: 435px;
+}
 </style>

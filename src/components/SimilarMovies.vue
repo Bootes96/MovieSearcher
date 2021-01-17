@@ -1,6 +1,6 @@
 <template>
   <div>
-        <h4>Similar Movies</h4>
+    <h4>Similar Movies</h4>
  		<div class="cards">
 			<div class="card-wrapper" v-for="movie in similar" :key="movie.id">
 				<div class="card">
@@ -21,10 +21,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
 	name: 'SimilarMovie',
-	props: ['similar']
+	data: () => ({
+    similar: [],
+  }),
+	async mounted() {
+    const id = this.$route.params.id;
+    const similarMovies = await this.$store.dispatch("fetchSimilarMovies", id);
+    this.similar = similarMovies.slice(0, 6);
+  },
 }
 </script>
 

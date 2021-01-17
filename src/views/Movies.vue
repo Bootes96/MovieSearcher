@@ -1,7 +1,10 @@
 <template>
   <div>
-    <MovieCard :movies='movies.results'/>
-    <Pagination v-if="movies.total_pages" :totalPages="movies.total_pages"/>
+    <Preloader v-if="loading"/>
+    <div v-else>
+      <MovieCard :movies='movies.results'/>
+      <Pagination v-if="movies.total_pages" :totalPages="movies.total_pages"/>
+    </div>
   </div>
 </template>
 
@@ -10,12 +13,17 @@
 import MovieCard from '@/components/MovieCard.vue'
 import {mapGetters, mapState} from 'vuex'
 import Pagination from '../components/Pagination.vue'
+import Preloader from '../components/Preloader.vue'
 
 export default {
   name: 'Movies',
+  data: () => ({
+    loading: true
+  }),
   components: {
     MovieCard,
-    Pagination
+    Pagination,
+    Preloader
   },
   async mounted() {
     const { sort_by } = this.$route.query
@@ -28,6 +36,7 @@ export default {
     this.$store.commit('changeGenres', genres)
     this.$store.commit('changePage', currentPage) 
     await this.$store.dispatch('fetchMovies')
+    this.loading = false
   },
   computed: {
     ...mapGetters(['movies']),

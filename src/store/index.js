@@ -25,7 +25,7 @@ export default new Vuex.Store({
   actions: {
     async fetchMovies({commit, state}) {
       try {
-        const result = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&language=en-US&sort_by=${state.sort}&include_adult=false&include_video=false&page=${state.page}&with_genres=${state.genres}`)
+        const result = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&language=en-US&sort_by=${state.sort}&include_adult=false&include_video=false&page=${state.page}&with_genres=${state.genres}&include_image_language=en,null`)
         commit('setMovies', result.data)
       } catch (error) {
         throw new Error(error)
