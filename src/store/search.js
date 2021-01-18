@@ -13,9 +13,9 @@ export default {
 	mutations: {
 		setSearchQuery: (state, searchQuery) => (state.searchQuery = searchQuery), //поисковый запрос
 		setSearchMovies: (state, data) => {
-      state.searchMovies = data.results
-	  state.totalResults = data.total_results
-	  state.totalPages = data.total_pages
+    	state.searchMovies = data.results
+	  	state.totalResults = data.total_results
+	  	state.totalPages = data.total_pages
 		}, //найденные фильмы
 		resetSearchMovies: (state) => (state.searchMovies = []),
 		changeSearchPage: (state, pageNum) => (state.page = pageNum)

@@ -23,12 +23,18 @@ export default {
 		...mapState(['searchQuery', 'searchMovies']),
 		query: {
 			get() {
+				console.log(this.$route.params.query);
 				return this.$store.state.search.searchQuery
 			},
 			set(val) {
 				return this.setSearchQuery(val)
 			}
 		}
+	},
+	mounted() {
+		this.query
+		this.setSearchQuery(this.$route.params.query)
+		this.search()
 	},
 	methods: {
 		...mapActions(['setSearchQuery', 'search']),

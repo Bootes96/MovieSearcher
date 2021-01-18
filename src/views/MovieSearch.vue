@@ -1,23 +1,27 @@
 <template>
 	<div>
-		<MovieCard :movies="movies"/>
-		<Paginate 
-			:page-count="totalPages"
-			:click-handler="changePage"
-      :prev-text="'<i class=material-icons>chevron_left</i>'"
-      :prev-class="'waves-effect'"
-      :next-text="'<i class=material-icons>chevron_right</i>'"
-      :next-class="'waves-effect'"
-      :container-class="'pagination'"
-      :page-class="'waves-effect'"
-      :active-class="'cyan lighten-2'"
-		/>
+		<Preloader v-if="!movies.length"/>
+		<div v-else>
+			<MovieCard :movies="movies"/>
+			<Paginate 
+				:page-count="totalPages"
+				:click-handler="changePage"
+				:prev-text="'<i class=material-icons>chevron_left</i>'"
+				:prev-class="'waves-effect'"
+				:next-text="'<i class=material-icons>chevron_right</i>'"
+				:next-class="'waves-effect'"
+				:container-class="'pagination'"
+				:page-class="'waves-effect'"
+				:active-class="'cyan lighten-2'"
+			/>
+	</div>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import MovieCard from '@/components/MovieCard'
+import Preloader from "@/components/Preloader"
 export default {
 	name: 'MovieSearch',
 	computed: {
@@ -37,6 +41,7 @@ export default {
   },
 	components: {
 		MovieCard,
+		Preloader
 	}
 }
 </script>

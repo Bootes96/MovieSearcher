@@ -12,7 +12,10 @@
 									<img class="movie__img" v-else :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="movie poster"/>
 								</div>
 								<span class="movie__average-vote green darken-2">{{movie.vote_average}}</span>
-								<button class="btn movie__average-button green darken-2">Add to Faves</button>
+								<div class="movie__action">
+									<a @click="$func.addToFavorite(movie, $event)" class="green-text text-darken-2" ref="favorite">ADD TO FAVORITES</a>
+									<i class="material-icons card-icon">favorite</i>
+								</div>
 							</div>
 							<div class="movie__info">
 								<h4 class="section-title">Movie Title</h4>
@@ -35,7 +38,7 @@
 										<span class="credits__person-character">Director</span>
 									</div>	
 								</div>
-								<h4 class="section-title">Crew</h4>
+								<h4 class="section-title">Cast</h4>
 								<div class="credits" v-for="actor in mainActors" :key="actor.id">
 									<div class="credits__person">
 										<span class="credits__person-name">{{actor.name}}</span>
@@ -130,6 +133,16 @@ export default {
 			position: relative;
 			margin-right: 20px;
 		}
+		&__action {
+			margin-top: 10px;
+			border: 1px solid #388e3c;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			a {
+				font-size: 1.3rem;
+			}
+		}
 		&__img {
 			height: 100%;
 			width: 100%;
@@ -152,7 +165,6 @@ export default {
 			&-button {
 				width: 345px;
 			}
-
 		}
 	}
 	.section-title {
