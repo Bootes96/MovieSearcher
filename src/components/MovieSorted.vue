@@ -107,7 +107,7 @@
         </p>
         <p class="genres-item">
           <label>
-            <input type="checkbox" value="10751" v-model="checkedGenres" />
+            <input type="checkbox" value="10752" v-model="checkedGenres" />
             <span>War</span>
           </label>
         </p>
@@ -121,7 +121,7 @@
     </form>
     <form action="#">
       <p class="sort-title">Sort movies by</p>
-      <div class="sort-wrapper">
+      <div class="sort">
         <p>
           <label>
             <input
@@ -178,10 +178,12 @@
 <script>
 export default {
   name: 'MovieSorted',
-  data: () => ({
-		checkedGenres: [],
-		sortBy: ''
-	}),
+  data: function() {
+		return {
+      checkedGenres: [],
+		  sortBy: ''
+    }
+	},
 	watch: {
 		sortBy(newSort) {
       this.$router.push({path: window.location.search, query: {sort_by: newSort}})
@@ -196,7 +198,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.genres {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -212,12 +214,31 @@ export default {
 			font-size: 1.5rem;
 			margin: 20px 0 20px 20px;
 		}
-		&-wrapper {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-			grid-column-gap: 1.5rem;
-			grid-row-gap: 2rem;
-		}
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		grid-column-gap: 1.5rem;
+		grid-row-gap: 2rem;
 	}
+
+  @media (max-width: 761px) {
+    .genres {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .genres-item {
+      span {
+        font-size: 11px !important;
+        padding-left: 20px !important;
+      }
+    }
+    .sort {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      span {
+        font-size: 11px !important;
+        padding-left: 25px !important;
+      }
+    }
+}
 </style>
   

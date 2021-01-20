@@ -30,10 +30,12 @@ export default {
   components: { Preloader },
 	name: 'SimilarMovie',
 	props: ['movieId'],
-	data: () => ({
-		loading: true,
-    similar: [],
-	}),
+	data: function() {
+		return { 
+			loading: true,
+			similar: [],
+		}
+	},
 	mounted() {
 		this.movies()
 	},

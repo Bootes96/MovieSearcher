@@ -17,9 +17,11 @@ import Preloader from '../components/Preloader.vue'
 
 export default {
   name: 'Movies',
-  data: () => ({
-    loading: true
-  }),
+  data: function() {
+    return {
+      loading: true
+    }
+  },
   components: {
     MovieCard,
     Pagination,

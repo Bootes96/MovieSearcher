@@ -1,12 +1,13 @@
 <template>
-	<div>
-		<div>
-			<nav class="green darken-2" >
-				<div class="nav-wrapper">
-					<router-link to="/" style="font-size: 2.1rem; margin: 0 4rem 0 2rem">MovieSearcher</router-link>
+	<div class="navigation__container">
+		<div >
+			<nav class="navigation green darken-2" >
+				<div class="navigation__list">
+					<router-link to="/" class="navigation__item" style="font-size: 2rem">MovieSearcher</router-link>
 					<router-link
 						to="/favorites"
 						style="font-size: 1.5rem"
+						class="navigation__item" 
 					>Favorites
 					</router-link>
 				</div>

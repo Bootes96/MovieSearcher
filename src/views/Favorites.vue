@@ -26,9 +26,11 @@ import MovieCard from '../components/MovieCard'
 
 export default {
   name: 'Favorites',
-  data: () => ({
-    movies: []
-  }),
+  data: function() {
+    return {
+      movies: []
+    }
+  },
   components: {
     MovieCard
   },

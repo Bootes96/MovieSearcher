@@ -9,7 +9,10 @@
 					</div>
 					<div class="card-image" @click="$router.push(`/single/${movie.id}`)">
 						<img v-if="!movie.poster_path" src="../assets/no-image.jpg"/>
-						<img v-else :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" />
+						<picture v-else>
+							<source :srcset="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" media='(min-width: 1300px)'/>
+							<img :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" alt="poster">
+						</picture>
 					</div>
 				</div>
 				<a @click="$router.push(`/single/${movie.id}`)" class="card-title black-text">

@@ -3,13 +3,13 @@
 		<Preloader v-if="loading"/>
 		<div class="container" v-else>
 				<div>
-					<div>
+					<div class="movie">
 						<h1 class="movie__title">{{movie.title}}</h1>
-						<div class="movie__content row">
+						<div class="movie__content">
 							<div class="movie__left">
 								<div class="movie__img-wrapper">
 									<img class="movie__img" v-if="!movie.poster_path" src="../assets/no-image.jpg" alt="movie poster" />
-									<img class="movie__img" v-else :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="movie poster"/>
+									<img class="movie__img" v-else :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" alt="movie poster"/>
 								</div>
 								<span class="movie__average-vote green darken-2">{{movie.vote_average}}</span>
 								<div class="movie__action">
@@ -75,15 +75,17 @@ import {mapGetters} from 'vuex'
 import Preloader from '../components/Preloader.vue'
 export default {
 	name: 'Single',
-	data: () => ({
-		loading: true,
-		movie: [],
-		movieCast: [],
-		mainActors: [],
-    genres: "",
-		directorName: "",
-		movieId: ''
-	}),
+	data: function() {
+		return {
+			loading: true,
+			movie: [],
+			movieCast: [],
+			mainActors: [],
+			genres: "",
+			directorName: "",
+			movieId: ''
+		}
+	},
 	components: {
 		SimilarMovies,
 		Navbar,
@@ -191,6 +193,49 @@ export default {
 		&__item {
 			display: flex;
 			align-items: center;
+		}
+	}
+
+	@media (min-width: 762px) and (max-width: 1199px) {
+			.votes {
+			&__item {
+				display: block;
+			}
+			&__title {
+				font-size: 11px;
+			}
+		}
+  }
+  
+	@media (max-width: 761px) {
+		.movie {
+			&__title {
+				font-size: 1.5rem;
+				text-align: center;
+				margin: 0 0 1rem 0;
+			}
+			&__left {
+				max-width: 320px;
+			}
+			&__img {
+				&-wrapper {
+					max-width: 320px;
+				}
+			}
+			&__content {
+				display: block;
+			}
+			&__action {
+				width: 320px;
+			}
+		}
+		.votes {
+			&__item {
+				display: block;
+			}
+			&__title {
+				font-size: 11px;
+			}
 		}
 	}
 </style>

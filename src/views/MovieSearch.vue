@@ -38,7 +38,7 @@ export default {
       await this.$store.dispatch('search')
       this.$router.push({path: window.location.search, query: {page: pageNum}})
     }
-  },
+	},
 	components: {
 		MovieCard,
 		Preloader

@@ -43,6 +43,7 @@ export default {
   }
 
   .cards	{
+    width: 100%;
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-column-gap: 1.5rem;
@@ -71,4 +72,40 @@ export default {
 			}
 		}
 	}
+
+  @media (min-width: 762px) and (max-width: 1199px) {
+  .cards	{
+    width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 1.5rem;
+		grid-row-gap: 2rem;
+	}
+}
+
+@media (max-width: 761px) {
+  .container {
+    max-width: 320px;
+    width: 320px;
+    overflow: hidden;
+  }
+  .cards	{
+    width: 100%;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-column-gap: 1.5rem;
+		grid-row-gap: 2rem;
+	}
+  .card {
+    max-width: 350px;
+    margin: 0 auto;
+    &-title {
+      display: block;
+      font-size: 1rem;
+			position: relative;
+			text-align: center;
+			cursor: default;
+		}
+  }
+}
 </style>
