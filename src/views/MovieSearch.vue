@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<Preloader v-if="!movies.length"/>
-		<div v-else>
+		<h1 v-if="!movies.length" style="text-align: center">Movie was not found</h1>
+		<div v-else-if="movies.length">
 			<MovieCard :movies="movies"/>
 			<Paginate 
 				:page-count="totalPages"
@@ -15,6 +15,7 @@
 				:active-class="'cyan lighten-2'"
 			/>
 	</div>
+	<Preloader v-else/>
 	</div>
 </template>
 

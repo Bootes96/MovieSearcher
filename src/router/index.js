@@ -39,6 +39,11 @@ const routes = [
     path: "/search",
     redirect: "/",
   }, 
+  {
+    path: "/:catchAll(.*)",
+    name: 'Not Found',
+    component: () => import("../views/NotFound.vue")
+  }
 ]
 
 const router = new VueRouter({
@@ -51,5 +56,6 @@ router.beforeEach((to, from, next) => {
   window.scrollTo(0, 0)
   next()
 })
+
 
 export default router
