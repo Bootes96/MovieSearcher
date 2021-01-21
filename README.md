@@ -1,19 +1,5 @@
-# moviedb
+This is a simple moviesearcher app based on TMDB API and created using Vue, Vuex, Vue-router
 
-## Project setup
-```
-npm install
-```
+Demo is available on Netlify: https://vibrant-mccarthy-8cabd1.netlify.app/moviesearcher/
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

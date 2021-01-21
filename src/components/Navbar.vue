@@ -10,7 +10,7 @@
       <div>
         <ul class="navigation__list green darken-2">
           <li class="navigation__item green darken-2">
-            <a @click="startPage" class="navigation__logo">MovieSearcher</a>
+            <router-link to="/" class="navigation__logo"> MovieSearcher</router-link>
           </li>
           <li class="navigation__item">
             <a class='dropdown-trigger nav-link' href='#' data-target='dropdown1' ref="dropdown">Options</a>
@@ -54,17 +54,12 @@
       })
     },
 
-    methods: {
-      startPage() {
-        if(this.$route.path !== '/') {
+    watch: {
+      "$route"() {
+        if(this.$route.path === '/') {
           this.trigger += 1
-          this.$store.commit('sortBy', 'popularity.desc')
-          this.$store.commit('changeGenres', '')
-          this.$store.commit('changePage', 1)
-          this.$store.dispatch('fetchMovies')
-          this.$router.push('/')
         }
-      }
+      } 
     },
 
     beforeDestroy() {
