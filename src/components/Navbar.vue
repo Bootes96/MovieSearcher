@@ -9,8 +9,8 @@
     <nav class="navigation green darken-2" >
       <div>
         <ul class="navigation__list green darken-2">
-          <li class="navigation__item green darken-2">
-            <router-link to="/" class="navigation__logo"> MovieSearcher</router-link>
+          <li class="navigation__item green darken-2" >
+            <router-link to="/" class="navigation__logo"> <span v-on:click="startPage">MovieSearcher</span></router-link>
           </li>
           <li class="navigation__item">
             <a class='dropdown-trigger nav-link' href='#' data-target='dropdown1' ref="dropdown">Options</a>
@@ -54,12 +54,23 @@
       })
     },
 
-    watch: {
-      "$route"() {
-        if(this.$route.path === '/') {
+    methods: {
+      startPage() {
+          console.log('hey');
           this.trigger += 1
-        }
-      } 
+          this.$store.commit('sortBy', 'popularity.desc')
+          this.$store.commit('changeGenres', '')
+          this.$store.commit('changePage', 1)
+          this.$store.dispatch('fetchMovies')
+
+          //removing active class 
+          const el = document.querySelector('.cyan')
+          el.classList.remove("cyan")
+
+          //adding active class to the first page
+          const pagination = document.querySelector('.pagination')
+          pagination.firstElementChild.nextElementSibling.classList.add('cyan', 'lighten-2')
+      }
     },
 
     beforeDestroy() {
