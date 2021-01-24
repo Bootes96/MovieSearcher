@@ -56,20 +56,7 @@
 
     methods: {
       startPage() {
-          console.log('hey');
           this.trigger += 1
-          this.$store.commit('sortBy', 'popularity.desc')
-          this.$store.commit('changeGenres', '')
-          this.$store.commit('changePage', 1)
-          this.$store.dispatch('fetchMovies')
-
-          //removing active class 
-          const el = document.querySelector('.cyan')
-          el.classList.remove("cyan")
-
-          //adding active class to the first page
-          const pagination = document.querySelector('.pagination')
-          pagination.firstElementChild.nextElementSibling.classList.add('cyan', 'lighten-2')
       }
     },
 
