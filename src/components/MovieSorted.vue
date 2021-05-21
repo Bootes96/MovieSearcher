@@ -186,13 +186,21 @@ export default {
 	},
 	watch: {
 		sortBy(newSort) {
-      this.$router.push({path: window.location.search, query: {sort_by: newSort}})
+      this.$router.push({path: window.location.search, query: {sort_by: newSort, page: 1}})
 			this.$store.commit('sortBy', newSort)
     },
     checkedGenres(genresArr) {
         const genres = genresArr.join(',')
-        this.$router.push({path: window.location.search, query: {with_genres: genres}})
+        this.$router.push({path: window.location.search, query: {with_genres: genres, page: 1}})
         this.$store.commit('changeGenres', genres)
+        if (this.checkedGenres.length === 0) {
+           const search = window.location.search.replace('&with_genres=', '')
+            window.history.replaceState(
+            null,
+            document.title,
+          `${window.location.pathname}${search}`
+        );
+        }
     }
 	}
 }
